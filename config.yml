@@ -1,0 +1,43 @@
+---
+projectName: FHIR-training-on-platform
+image: jembi/platform:latest
+logPath: /tmp/logs
+
+packages:
+  - fhir-training-on-platform
+  - reverse-proxy-nginx
+
+customPackages:
+  - id: fhir-training-on-platform
+    path: ../fhir-training-on-platform
+
+profiles:
+  - name: local
+    packages:
+      - fhir-training-on-platform
+    envFiles:
+      - ./.env.local
+    dev: true
+
+  - name: staging
+    packages:
+      - fhir-training-on-platform
+      - reverse-proxy-nginx
+    envFiles:
+      - ./.env.stg
+    dev: false
+
+  - name: qa
+    packages:
+      - fhir-training-on-platform
+      - reverse-proxy-nginx
+    envFiles:
+      - ./.env.qa
+    dev: false
+
+  - name: test
+    packages:
+      - fhir-training-on-platform
+    envFiles:
+      - ./.env.test
+    dev: true
