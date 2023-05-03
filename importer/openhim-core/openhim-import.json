@@ -1,7 +1,7 @@
 {
   "Channels": [
     {
-      "methods": ["POST", "DELETE"],
+      "methods": ["POST", "GET"],
       "type": "http",
       "allow": ["instant"],
       "whitelist": [],
@@ -23,8 +23,8 @@
           "forwardAuthHeader": false,
           "name": "FHIR Server",
           "secured": false,
-          "host": "hapi-proxy",
-          "port": 18080,
+          "host": "hapi-fhir",
+          "port": 8080,
           "path": "",
           "pathTransform": "",
           "primary": true,

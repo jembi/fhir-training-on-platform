@@ -1,11 +1,12 @@
 ---
 projectName: FHIR-training-on-platform
-image: jembi/platform:latest
+image: jembi/platform:2.0.0
 logPath: /tmp/logs
 
 packages:
   - fhir-training-on-platform
   - reverse-proxy-nginx
+  - fhir-datastore-hapi-fhir
 
 customPackages:
   - id: fhir-training-on-platform
@@ -18,14 +19,23 @@ profiles:
     envFiles:
       - ./.env.local
     dev: true
-
-  - name: staging
+    
+  - name: local-remove-fhir
     packages:
-      - fhir-training-on-platform
-      - reverse-proxy-nginx
+      - fhir-datastore-hapi-fhir
     envFiles:
-      - ./.env.stg
-    dev: false
+      - ./.env.local
+    dev: true
+    only: true
+
+  - name: local-deploy-ig
+    packages:
+      - fhir-datastore-hapi-fhir
+      - fhir-training-on-platform
+    envFiles:
+      - ./.env.local
+    dev: true
+    only: true
 
   - name: qa
     packages:
@@ -35,9 +45,19 @@ profiles:
       - ./.env.qa
     dev: false
 
-  - name: test
+  - name: qa-remove-fhir
     packages:
+      - fhir-datastore-hapi-fhir
+    envFiles:
+      - ./.env.qa
+    dev: false
+    only: true
+
+  - name: qa-deploy-ig
+    packages:
+      - fhir-datastore-hapi-fhir
       - fhir-training-on-platform
     envFiles:
-      - ./.env.test
-    dev: true
+      - ./.env.qa
+    dev: false
+    only: true

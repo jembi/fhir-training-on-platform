@@ -1,14 +1,12 @@
 #!/bin/bash
 
 declare ACTION=""
-declare MODE=""
 declare COMPOSE_FILE_PATH=""
 declare UTILS_PATH=""
 declare STACK="fhir-training"
 
 function init_vars() {
   ACTION=$1
-  MODE=$2
 
   COMPOSE_FILE_PATH=$(
     cd "$(dirname "${BASH_SOURCE[0]}")" || exit
@@ -18,7 +16,6 @@ function init_vars() {
   UTILS_PATH="${COMPOSE_FILE_PATH}/../utils"
 
   readonly ACTION
-  readonly MODE
   readonly COMPOSE_FILE_PATH
   readonly UTILS_PATH
   readonly STACK
@@ -70,21 +67,13 @@ function deploy_importers() {
 }
 
 function initialize_package() {
-  local fhir_training_dev_compose_param=""
-
-  if [[ "$MODE" == "dev" ]]; then
-    log info "Running FHIR Training package in DEV mode"
-    fhir_training_dev_compose_param="docker-compose.dev.yml"
-  else
-    log info "Running FHIR Training package in PROD mode"
-  fi
-
   (
     deploy_importers
 
     if [[ $DISABLE_VALIDATION == "false" ]]; then
       restart_hapi_fhir
     fi
+    docker::join_network openhim_openhim-core hapi-fhir_public
   ) || {
     log error "Failed to deploy FHIR Training package"
     exit 1
