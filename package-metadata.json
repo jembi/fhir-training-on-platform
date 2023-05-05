@@ -4,15 +4,13 @@
   "name": "FHIR Training",
   "type": "infrastructure",
   "dependencies": [
-    "message-bus-helper-hapi-proxy",
-    "message-bus-kafka",
     "interoperability-layer-openhim",
     "fhir-datastore-hapi-fhir"
   ],
   "environmentVariables": {
     "HAPI_FHIR_INSTANCES": "1",
     "HAPI_SERVER_URL": "http://hapi-fhir:8080/fhir",
-    "FHIR_IG_URL": "https://openhie.github.io/hiv-ig",
+    "FHIR_IG_URL": "https://openhie.github.io/HIV-CBS",
     "FHIR_STACKNAME": "hapi-fhir",
     "OPENHIM_TRANSACTION_URL": "http://openhim-core:5001",
     "OPENHIM_MEDIATOR_URL": "https://openhim-core:8080",
