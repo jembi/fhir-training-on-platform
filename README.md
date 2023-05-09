@@ -9,6 +9,7 @@ This repo contains the required config to start up a Hapi FHIR server alongside 
 1. Check that you have an active docker swarm running on the respective environment. `docker info | grep Swarm`
 1. If no swarm is running, you can start a swarm with `docker swarm init`.
 1. Ensure that you have the correct IG URL specified in the respective environment variable file (e.g. `.env.local`). The variable to set is `FHIR_IG_URL`.
+1. Run `./get-cli.sh` to download the latest release of the CLI.
 1. Run the relevant init script. (e.g. `./init-local.sh`)
    
 ## Reloading the IG:
