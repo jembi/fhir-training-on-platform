@@ -62,4 +62,3 @@ profiles:
     dev: false
     only: true
 
-# hapi-fhir-cli upload-terminology -d "/Users/joeflack4/projects/hapi-fhir-jpaserver-starter/data/custom1/custom1.zip" -v r4 -t http://20.119.216.32:8080/fhir -u http://20.119.216.32:8080/fhir/CodeSystem/2
