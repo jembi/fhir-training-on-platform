@@ -1,0 +1,7 @@
+ACCOUNT = "jembi-fhir"
+PUBLIC_KEY_PATH = "/home/michael/.ssh/deploy_ed25519.pub"
+PROJECT_NAME = "JEMBI_FHIR_TRAINING"
+HOSTED_ZONE_ID = "Z05791362XM6IBON020U4"
+DOMAIN_NAME = "jembi.training"
+SUBNET_ID = "subnet-0abdb37ae251229a4"
+VPC_ID = "vpc-07db365632522a909"
