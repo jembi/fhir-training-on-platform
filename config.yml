@@ -1,6 +1,6 @@
 ---
 projectName: FHIR-training-on-platform
-image: jembi/platform:2.4.0
+image: jembi/platform:2.4.3
 logPath: /tmp/logs
 
 packages:
