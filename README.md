@@ -30,3 +30,7 @@ The `./depoy-{environment}.sh` scripts will default to using the `Linux` binary 
 1. The `./deploy-local.sh` and `./replace-ig-local.sh` scripts will make use of Platform profiles which are specified to configure the services for local development purposes exposing the ports of these services and allowing access to the Hapi-FHIR GUI.
 ### QA:
 1. The `./deploy-qa.sh` and `./replace-ig-qa.sh` scripts will make use of Platform profiles which are specified to configure the services for QA purposes, securing the services and disallowing access to the Hapi-FHIR GUI.
+
+## Deploying specific version of fhir
+
+To deploy a specific version of FHIR, use the environment variable FHIR_VERSION. Default value is R4
