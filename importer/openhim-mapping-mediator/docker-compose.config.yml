@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  mapping-mediator-config-importer:
+    image: jembi/instantohie-config-importer
+    deploy:
+      restart_policy:
+        condition: none
+    configs:
+      - source: mediator-config-metadata.js
+        target: /metadata.js
+      - source: mediator-config-registerFacility.json
+        target: /registerFacility.json
+      - source: mediator-config-getFacilities.json
+        target: /getFacilities.json
+    networks:
+      openhim:
+    # This command will only attempt to import the config when the uptime responds with a 2xx
+    command: sh -c "wait-on -t 60000 http-get://openhim-mapping-mediator:3003/uptime && node /metadata.js"
+
+configs:
+  mediator-config-metadata.js:
+    file: ./metadata.js
+    name: mediator-config-metadata.js-${mediator_config_metadata_js_DIGEST:?err}
+    labels:
+      name: fhir-training
+  mediator-config-registerFacility.json:
+    file: ./registerFacility.json
+    name: mediator-config-registerFacility.json${mediator_config_registerFacility_json_DIGEST:?err}
+    labels:
+      name: fhir-training
+  mediator-config-getFacilities.json:
+    file: ./getFacilities.json
+    name: mediator-config-getFacilities.json${mediator_config_getFacilities_json_DIGEST:?err}
+    labels:
+      name: fhir-training
+
+networks:
+  openhim:
+    name: openhim_public
+    external: true

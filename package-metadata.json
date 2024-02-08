@@ -4,7 +4,7 @@
   "name": "FHIR Training",
   "type": "infrastructure",
   "dependencies": [
-    "interoperability-layer-openhim",
+    "openhim-mapping-mediator",
     "fhir-datastore-hapi-fhir"
   ],
   "environmentVariables": {

@@ -1,0 +1,35 @@
+{
+  "name": "ft-GetFacilities",
+  "description": "Retrieves all facilities",
+  "endpoint": {
+    "pattern": "/ft-facilities"
+  },
+  "transformation": {
+    "input": "JSON",
+    "output": "JSON"
+  },
+  "inputMapping": {
+    "requestBody.original": "original",
+    "requestBody.headers": "headers",
+    "lookupRequests.rs-GetFacilities.data":"data"
+  },
+  "constants": {
+    "resourceType": "Patient"
+  },
+  "requests":{
+    "lookup": [],
+    "response": [
+      {
+        "id": "rs-GetFacilities",
+        "allowedStatuses": ["2xx", "3xx", "4xx"],
+        "forwardExistingRequestBody": false,
+        "config": {
+            "method": "GET",
+            "url": "http://hapi-fhir:8080/fhir/Organization",
+            "headers": {
+                "Content-Type": "application/fhir+json"
+            }
+        }
+      }]
+  }
+}
