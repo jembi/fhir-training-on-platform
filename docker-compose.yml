@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  fhir-training-client:
+    image: jembi/fhir-training-client:1.0.0
+    networks:
+      - fhir-training
+    ports:
+      - "3000:3000"
+
+  fhir-training-validator:
+    image: jembi/fhir-training-validator:1.0.0
+    ports:
+      - "3004:80"
+    restart: unless-stopped
+    networks:
+      - fhir-training
+    healthcheck:
+     test: "curl -sSk http://fhir-training-validator/heartbeat || exit 1"
+     interval: 30s
+     timeout: 30s
+     retries: 3
+
+networks:
+  fhir-training:
+    name: fhir-training_public
+    external: true
