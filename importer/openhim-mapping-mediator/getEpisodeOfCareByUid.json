@@ -1,0 +1,45 @@
+{
+    "name": "ft-GetEpisodeOfCareByUID",
+    "description": "Retrieves an episode of care by client UID",
+    "endpoint": {
+      "pattern": "/ft-episode-of-care/:uid"
+    },
+    "transformation": {
+      "input": "JSON",
+      "output": "JSON"
+    },
+  "inputMapping": {
+      "requestBody.original": "original",
+      "requestBody.headers": "headers",
+      "lookupRequests.rs-GetEpisodeOfCareByUID.data":"data"
+    },
+    "constants": {
+      "resourceType": "Condition"
+    },
+    "requests":{
+      "lookup": [],
+      "response": [
+        {
+          "id": "rs-GetEpisodeOfCareByUID",
+          "allowedStatuses": ["2xx", "3xx", "4xx"],
+          "forwardExistingRequestBody": false,
+          "config": {
+              "condition": "urlParams.uid and urlParams.uid != ''",
+              "method": "GET",
+              "url": "http://hapi-fhir:8080/fhir/EpisodeOfCare?patient=Patient/:uid",
+               "params": 
+               {
+                  "url": 
+                  {
+                      "uid": {
+                          "path": "urlParams.uid"
+                      }
+                  }
+                },
+              "headers": {
+                  "Content-Type": "application/fhir+json"
+              }
+          }
+        }]
+    }
+  }

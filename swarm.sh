@@ -78,6 +78,13 @@ function initialize_package() {
     log error "Failed to deploy FHIR Training package"
     exit 1
   }
+
+  (
+    docker::deploy_service $STACK "${COMPOSE_FILE_PATH}" "docker-compose.yml"
+  ) || {
+    log error "Failed to deploy package"
+    exit 1
+  }
 }
 
 function destroy_package() {

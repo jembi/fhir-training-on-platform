@@ -1,0 +1,55 @@
+{
+    "name": "ft-SubmitBundle",
+    "description": "Submits a generic fhir bundle - e.g. EMR bundle, new lab order, cancel lab order",
+    "endpoint": {
+      "pattern": "/ft-fhir"
+    },
+    "transformation": {
+      "input": "JSON",
+      "output": "JSON"
+    },  
+    "constants": {
+      "happyFHIRBundleMethod": "/fhir",
+      "happyFHIRPort": 8080,
+      "happyFHIRUrl":"hapi-fhir"
+    },
+    "inputMapping": {
+      "requestBody.original": "original",
+      "requestBody.headers": "headers",
+      "requestBody.validateBundle": "validateBundle",
+      "requestBody.igBundle":"igBundle",
+      "requestBody.dataBundle":"dataBundle",
+      "constants.happyFHIRUrl":"happyFHIRUrl",
+      "constants.happyFHIRPort":"happyFHIRPort",
+      "constants.happyFHIRBundleMethod":"happyFHIRBundleMethod"    
+    },
+    "requests":{
+      "lookup": [],
+      "response3": [
+      {
+          "id": "rs-SubmitBundle",
+          "allowedStatuses": ["2xx", "3xx", "4xx"],
+          "forwardExistingRequestBody": true,
+          "config": {
+              "method": "POST",
+              "url": "http://hapi-fhir:8080/fhir/",
+              "headers": {
+                  "Content-Type": "application/fhir+json"
+              }
+          }
+      }],
+      "response": [
+          {
+              "id": "lk-ValidateBundle",
+              "config": {
+                  "method": "POST",
+                  "forwardExistingRequestBody": true,
+                  "url": "fhir-training-validator-fhir-training:80/processBundle",
+                  "headers": {
+                      "Content-Type": "application/json"
+                  }
+              }
+          }
+      ]
+    }
+  }

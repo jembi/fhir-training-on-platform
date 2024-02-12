@@ -1,0 +1,49 @@
+{
+    "name": "GetLabOrders-New",
+    "description": "An end-point to get new lab orders",
+    "endpoint": {
+      "pattern": "/ft-lab-orders-new/:uid"
+    },
+    "constants": {
+      "resourceType": "Bundle",
+      "orderStatus": "requested"
+    },
+    "transformation": {
+      "input": "JSON",
+      "output": "JSON"
+    },
+    "inputMapping":
+    {
+      "requestBody.original": "original",
+      "requestBody.headers": "headers",
+      "lookupRequests.rs-GetLabOrders-New.data":"data"
+    },
+    "requests":{
+      "lookup": [],
+      "response": [
+      {
+          "id": "rs-GetLabOrders-New",
+          "allowedStatuses": ["2xx", "3xx", "4xx"],
+          "config": {
+              "condition": "urlParams.uid and urlParams.uid != ''",
+              "method": "GET",
+              "url": "http://hapi-fhir:8080/fhir/ServiceRequest?_has:Task:based-on:status=:orderStatusLookup&subject=Patient/:uid&_revinclude=Task:based-on&_revinclude=Task:requester&_include=Task:requester&_include=ServiceRequest:subject&_include=ServiceRequest:requester",
+               "params": 
+               {
+                  "url": 
+                  {
+                      "uid": {
+                          "path": "urlParams.uid"
+                      },
+                      "orderStatusLookup": {
+                          "path": "constants.orderStatus"
+                      }
+                  }
+                },
+              "headers": {
+                  "Content-Type": "application/fhir+json"
+              }
+          }
+        }]
+      }
+  }

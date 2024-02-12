@@ -1,0 +1,45 @@
+{
+  "name": "ft-GetClientByNID",
+  "description": "Retrieves a client by NID",
+  "endpoint": {
+    "pattern": "/ft-client-nid/:nid"
+  },
+  "transformation": {
+    "input": "JSON",
+    "output": "JSON"
+  },
+  "inputMapping": {
+    "requestBody.original": "original",
+    "requestBody.headers": "headers",
+    "lookupRequests.rs-GetClientByUID.data":"data"
+  },
+  "constants": {
+    "resourceType": "Patient"
+  },
+  "requests":{
+    "lookup": [],
+    "response": [
+      {
+        "id": "rs-GetClientByNID",
+        "allowedStatuses": ["2xx", "3xx", "4xx"],
+        "forwardExistingRequestBody": false,
+        "config": {
+            "condition": "urlParams.nid and urlParams.nid != ''",
+            "method": "GET",
+            "url": "http://hapi-fhir:8080/fhir/Patient?identifier=http://openhie.org/fhir/training-solution-1/identifier/nid|:nid",
+             "params": 
+             {
+                "url": 
+                {
+                    "nid": {
+                        "path": "urlParams.nid"
+                    }
+                }
+              },
+            "headers": {
+                "Content-Type": "application/fhir+json"
+            }
+        }
+      }]
+  }
+}

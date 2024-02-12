@@ -1,0 +1,45 @@
+{
+    "name": "ft-GetClientDiagnosisByUID",
+    "description": "Retrieves a client diagnosis by client UID",
+    "endpoint": {
+      "pattern": "/ft-client-diagnosis/:uid"
+    },
+    "transformation": {
+      "input": "JSON",
+      "output": "JSON"
+    },
+  "inputMapping": {
+      "requestBody.original": "original",
+      "requestBody.headers": "headers",
+      "lookupRequests.rs-GetClientDiagnosisByUID.data":"data"
+    },
+    "constants": {
+      "resourceType": "Condition"
+    },
+    "requests":{
+      "lookup": [],
+      "response": [
+        {
+          "id": "rs-GetClientDiagnosisByUID",
+          "allowedStatuses": ["2xx", "3xx", "4xx"],
+          "forwardExistingRequestBody": false,
+          "config": {
+              "condition": "urlParams.uid and urlParams.uid != ''",
+              "method": "GET",
+              "url": "http://hapi-fhir:8080/fhir/Condition?subject=Patient/:uid",
+               "params": 
+               {
+                  "url": 
+                  {
+                      "uid": {
+                          "path": "urlParams.uid"
+                      }
+                  }
+                },
+              "headers": {
+                  "Content-Type": "application/fhir+json"
+              }
+          }
+        }]
+    }
+  }

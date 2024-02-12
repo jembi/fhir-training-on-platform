@@ -1,0 +1,33 @@
+{
+  "name": "ft-RegisterFacility",
+  "description": "Register a new facility",
+  "endpoint": {
+    "pattern": "/ft-facility"
+  },
+  "transformation": {
+    "input": "JSON",
+    "output": "JSON"
+  },
+  "inputMapping": {
+    "requestBody.original": "original",
+    "requestBody.headers": "headers",
+    "lookupRequests.rs-RegisterFacility.data":"data"
+  },
+  "constants": {
+    "resourceType": "Organization"
+  },
+  "requests":{
+    "lookup": [],
+    "response": [
+      {
+        "id": "rs-RegisterFacility",
+        "config": {
+            "method": "POST",
+            "url": "http://hapi-fhir:8080/fhir/Organization",
+            "headers": {
+                "Content-Type": "application/fhir+json"
+            }
+        }
+      }]
+  }
+}
