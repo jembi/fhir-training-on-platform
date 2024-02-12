@@ -1,0 +1,44 @@
+{
+    "name": "ft-GetLabOrder",
+    "description": "An end-point to a single get lab order by id",
+    "endpoint": {
+      "pattern": "/ft-lab-order/:id"
+    },
+    "constants": {
+      "resourceType": "Bundle"
+    },
+    "transformation": {
+      "input": "JSON",
+      "output": "JSON"
+    },
+    "inputMapping": {
+      "requestBody.original": "original",
+      "requestBody.headers": "headers",
+      "lookupRequests.rs-GetLabOrder.data":"data"
+    },
+    "requests":{
+      "lookup": [],
+      "response": [
+        {
+          "id": "rs-GetLabOrder",
+          "allowedStatuses": ["2xx", "3xx", "4xx"],
+          "config": {
+              "condition": "urlParams.id and urlParams.id != ''",
+              "method": "GET",
+              "url": "http://hapi-fhir:8080/fhir/ServiceRequest?identifier=:serviceRequestId&_revinclude=Task:based-on&_revinclude=Task:requester&_include=Task:requester&_include=ServiceRequest:subject&_include=ServiceRequest:requester",
+               "params": 
+               {
+                  "url": 
+                  {
+                      "serviceRequestId": {
+                          "path": "urlParams.id"
+                      }
+                  }
+                },
+              "headers": {
+                  "Content-Type": "application/fhir+json"
+              }
+          }
+        }]
+    }
+  }

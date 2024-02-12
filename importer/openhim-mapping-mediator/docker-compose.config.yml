@@ -15,10 +15,28 @@ services:
         target: /getFacilities.json
       - source: mediator-config-getClientByUid.json
         target: /getClientByUid.json
-      - source: mediator-config-getClientByNik.json
-        target: /getClientByNik.json
+      - source: mediator-config-getClientByNid.json
+        target: /getClientByNid.json
       - source: mediator-config-getClientByMr.json
         target: /getClientByMr.json
+      - source: mediator-config-getClientDiagnosisByUid.json
+        target: /getClientDiagnosisByUid.json
+      - source: mediator-config-getEpisodeOfCareByUid.json
+        target: /getEpisodeOfCareByUid.json
+      - source: mediator-config-getHivTestingByUid.json
+        target: /getHivTestingByUid.json
+      - source: mediator-config-getArvTreatmentByUid.json
+        target: /getArvTreatmentByUid.json
+      - source: mediator-config-submitBundle.json
+        target: /submitBundle.json
+      - source: mediator-config-getLabOrder.json
+        target: /getLabOrder.json
+      - source: mediator-config-getLabOrders.json
+        target: /getLabOrders.json
+      - source: mediator-config-getLabOrdersNew.json
+        target: /getLabOrdersNew.json
+      - source: mediator-config-getLabOrdersHistory.json
+        target: /getLabOrdersHistory.json
     networks:
       openhim:
     # This command will only attempt to import the config when the uptime responds with a 2xx
@@ -45,9 +63,9 @@ configs:
     name: mediator-config-getClientByUid.json${mediator_config_getClientByUid_json_DIGEST:?err}
     labels:
       name: fhir-training
-  mediator-config-getClientByNik.json:
-    file: ./getClientByNik.json
-    name: mediator-config-getClientByNik.json${mediator_config_getClientByNik_json_DIGEST:?err}
+  mediator-config-getClientByNid.json:
+    file: ./getClientByNid.json
+    name: mediator-config-getClientByNid.json${mediator_config_getClientByNid_json_DIGEST:?err}
     labels:
       name: fhir-training
   mediator-config-getClientByMr.json:
@@ -55,6 +73,51 @@ configs:
     name: mediator-config-getClientByMr.json${mediator_config_getClientByMr_json_DIGEST:?err}
     labels:
       name: fhir-training      
+  mediator-config-getClientDiagnosisByUid.json:
+    file: ./getClientDiagnosisByUid.json
+    name: mediator-config-getClientDiagnosisByUid.json${mediator_config_getClientDiagnosisByUid_json_DIGEST:?err}
+    labels:
+      name: fhir-training    
+  mediator-config-getEpisodeOfCareByUid.json:
+    file: ./getEpisodeOfCareByUid.json
+    name: mediator-config-getEpisodeOfCareByUid.json${mediator_config_getEpisodeOfCareByUid_json_DIGEST:?err}
+    labels:
+      name: fhir-training   
+  mediator-config-getHivTestingByUid.json:
+    file: ./getHivTestingByUid.json
+    name: mediator-config-getHivTestingByUid.json${mediator_config_getHivTestingByUid_json_DIGEST:?err}
+    labels:
+      name: fhir-training         
+  mediator-config-getArvTreatmentByUid.json:
+    file: ./getArvTreatmentByUid.json
+    name: mediator-config-getArvTreatmentByUid.json${mediator_config_getArvTreatmentByUid_json_DIGEST:?err}
+    labels:
+      name: fhir-training       
+  mediator-config-submitBundle.json:
+    file: ./submitBundle.json
+    name: mediator-config-submitBundle.json${mediator_config_submitBundle_json_DIGEST:?err}
+    labels:
+      name: fhir-training       
+  mediator-config-getLabOrder.json:
+    file: ./getLabOrder.json
+    name: mediator-config-getLabOrder.json${mediator_config_getLabOrder_json_DIGEST:?err}
+    labels:
+      name: fhir-training    
+  mediator-config-getLabOrders.json:
+    file: ./getLabOrders.json
+    name: mediator-config-getLabOrders.json${mediator_config_getLabOrders_json_DIGEST:?err}
+    labels:
+      name: fhir-training    
+  mediator-config-getLabOrdersNew.json:
+    file: ./getLabOrdersNew.json
+    name: mediator-config-getLabOrdersNew.json${mediator_config_getLabOrdersNew_json_DIGEST:?err}
+    labels:
+      name: fhir-training   
+  mediator-config-getLabOrdersHistory.json:
+    file: ./getLabOrdersHistory.json
+    name: mediator-config-getLabOrdersHistory.json${mediator_config_getLabOrdersHistory_json_DIGEST:?err}
+    labels:
+      name: fhir-training 
 
 networks:
   openhim:

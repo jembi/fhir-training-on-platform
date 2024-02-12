@@ -1,0 +1,45 @@
+{
+    "name": "ft-GetARVTreatmentByUID",
+    "description": "Retrieves a ARV treatment by client UID",
+    "endpoint": {
+      "pattern": "/ft-arv-treatment/:uid"
+    },
+    "transformation": {
+      "input": "JSON",
+      "output": "JSON"
+    },
+  "inputMapping": {
+      "requestBody.original": "original",
+      "requestBody.headers": "headers",
+      "lookupRequests.rs-GetARVTreatmentByUID.data":"data"
+    },
+    "constants": {
+      "resourceType": "Condition"
+    },
+    "requests":{
+      "lookup": [],
+      "response": [
+        {
+          "id": "rs-GetARVTreatmentByUID",
+          "allowedStatuses": ["2xx", "3xx", "4xx"],
+          "forwardExistingRequestBody": false,
+          "config": {
+              "condition": "urlParams.uid and urlParams.uid != ''",
+              "method": "GET",
+              "url": "http://hapi-fhir:8080/fhir/CarePlan?subject=Patient/:uid",
+               "params": 
+               {
+                  "url": 
+                  {
+                      "uid": {
+                          "path": "urlParams.uid"
+                      }
+                  }
+                },
+              "headers": {
+                  "Content-Type": "application/fhir+json"
+              }
+          }
+        }]
+    }
+  }
