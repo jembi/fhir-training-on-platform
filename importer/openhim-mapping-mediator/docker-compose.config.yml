@@ -13,6 +13,12 @@ services:
         target: /registerFacility.json
       - source: mediator-config-getFacilities.json
         target: /getFacilities.json
+      - source: mediator-config-getClientByUid.json
+        target: /getClientByUid.json
+      - source: mediator-config-getClientByNik.json
+        target: /getClientByNik.json
+      - source: mediator-config-getClientByMr.json
+        target: /getClientByMr.json
     networks:
       openhim:
     # This command will only attempt to import the config when the uptime responds with a 2xx
@@ -34,6 +40,21 @@ configs:
     name: mediator-config-getFacilities.json${mediator_config_getFacilities_json_DIGEST:?err}
     labels:
       name: fhir-training
+  mediator-config-getClientByUid.json:
+    file: ./getClientByUid.json
+    name: mediator-config-getClientByUid.json${mediator_config_getClientByUid_json_DIGEST:?err}
+    labels:
+      name: fhir-training
+  mediator-config-getClientByNik.json:
+    file: ./getClientByNik.json
+    name: mediator-config-getClientByNik.json${mediator_config_getClientByNik_json_DIGEST:?err}
+    labels:
+      name: fhir-training
+  mediator-config-getClientByMr.json:
+    file: ./getClientByMr.json
+    name: mediator-config-getClientByMr.json${mediator_config_getClientByMr_json_DIGEST:?err}
+    labels:
+      name: fhir-training      
 
 networks:
   openhim:
