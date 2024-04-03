@@ -1,0 +1,39 @@
+---
+projectName: FHIR-training-on-platform
+image: jembi/platform:2.3.1
+logPath: /tmp/logs
+
+packages:
+  - fhir-training-on-platform
+  - reverse-proxy-nginx
+  - fhir-datastore-hapi-fhir
+
+customPackages:
+  - id: fhir-training-on-platform
+    path: ../../fhir-training-on-platform
+
+profiles:
+  - name: node-3
+    packages:
+      - fhir-training-on-platform
+      - reverse-proxy-nginx
+    envFiles:
+      - ./.env.node-3
+    dev: false
+
+  - name: node-3-remove-fhir
+    packages:
+      - fhir-datastore-hapi-fhir
+    envFiles:
+      - ./.env.node-3
+    dev: false
+    only: true
+
+  - name: node-3-deploy-ig
+    packages:
+      - fhir-datastore-hapi-fhir
+      - fhir-training-on-platform
+    envFiles:
+      - ./.env.node-3
+    dev: false
+    only: true
