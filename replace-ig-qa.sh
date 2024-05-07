@@ -11,20 +11,17 @@ fi
 case ${operating_system} in
 linux)
   echo "Running with the Linux CLI binary"
-  ./instant-linux package remove --profile=qa-remove-fhir
-  ./instant-linux package init --profile=qa-deploy-ig
+  ./instant-linux package up --profile=qa-deploy-ig --env-var=IMPORT_ONLY=hapi-fhir
   exit 0
   ;;
 macos)
   echo "Running with the MacOS CLI binary"
-  ./instant-macos package remove --profile=qa-remove-fhir
-  ./instant-macos package init --profile=qa-deploy-ig
+  ./instant-macos package up --profile=qa-deploy-ig --env-var=IMPORT_ONLY=hapi-fhir
   exit 0
   ;;
 windows)
   echo "Running with the Windows CLI binary"
-  ./instant.exe package remove --profile=qa-remove-fhir
-  ./instant.exe package init --profile=qa-deploy-ig
+  ./instant.exe package up --profile=qa-deploy-ig --env-var=IMPORT_ONLY=hapi-fhir
   exit 0
   ;;
 --help)

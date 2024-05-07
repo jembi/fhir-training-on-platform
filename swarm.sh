@@ -50,6 +50,11 @@ function deploy_importers() {
   for service_path in "${COMPOSE_FILE_PATH}/importer/"*/; do
     target_service_name=$(basename "$service_path")
 
+    if [[ $IMPORT_ONLY != "" && "${target_service_name}" != $IMPORT_ONLY ]]; then
+      log warn "IMPORT_ONLY ($IMPORT_ONLY) doesnt match $target_service_name. continue..."
+      continue
+    fi
+
     # Only run the importer for fhir datastore when validation is enabled
     if [[ $DISABLE_VALIDATION == "true" ]] && [[ "${target_service_name}" == "hapi-fhir" ]]; then
       log warn "Validation is disabled... Skipping the deploy of hapi fhir config importer"
