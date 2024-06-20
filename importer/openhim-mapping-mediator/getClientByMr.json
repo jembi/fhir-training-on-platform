@@ -1,0 +1,45 @@
+{
+    "name": "ft-GetClientByMR",
+    "description": "Retrieves a client by medical record (MR)",
+    "endpoint": {
+      "pattern": "/ft-client-mr/:mr"
+    },
+    "transformation": {
+      "input": "JSON",
+      "output": "JSON"
+    },
+    "inputMapping": {
+      "requestBody.original": "original",
+      "requestBody.headers": "headers",
+      "lookupRequests.rs-GetClientByMR.data":"data"
+    },
+    "constants": {
+      "resourceType": "Patient"
+    },
+    "requests":{
+      "lookup": [],
+      "response": [
+        {
+          "id": "rs-GetClientByMR",
+          "allowedStatuses": ["2xx", "3xx", "4xx"],
+          "forwardExistingRequestBody": false,
+          "config": {
+              "condition": "urlParams.mr and urlParams.mr != ''",
+              "method": "GET",
+              "url": "http://hapi-fhir:8080/fhir/Patient?identifier=http://openhie.org/fhir/training-solution-1/identifier/mr|:mr",
+               "params": 
+               {
+                  "url": 
+                  {
+                      "mr": {
+                          "path": "urlParams.mr"
+                      }
+                  }
+                },
+              "headers": {
+                  "Content-Type": "application/fhir+json"
+              }
+          }
+        }]
+    }
+  }

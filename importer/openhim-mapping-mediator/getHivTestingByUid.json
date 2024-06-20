@@ -1,0 +1,45 @@
+{
+    "name": "ft-GetHIVTestingByUID",
+    "description": "Retrieves a HIV testing by client UID",
+    "endpoint": {
+      "pattern": "/ft-hiv-testing/:uid"
+    },
+    "transformation": {
+      "input": "JSON",
+      "output": "JSON"
+    },
+  "inputMapping": {
+      "requestBody.original": "original",
+      "requestBody.headers": "headers",
+      "lookupRequests.rs-GetHIVTestingByUID.data":"data"
+    },
+    "constants": {
+      "resourceType": "Condition"
+    },
+    "requests":{
+      "lookup": [],
+      "response": [
+        {
+          "id": "rs-GetHIVTestingByUID",
+          "allowedStatuses": ["2xx", "3xx", "4xx"],
+          "forwardExistingRequestBody": false,
+          "config": {
+              "condition": "urlParams.uid and urlParams.uid != ''",
+              "method": "GET",
+              "url": "http://hapi-fhir:8080/fhir/Observation?_profile=http://openhie.org/fhir/training-solution-1/StructureDefinition/date-hiv-test-done&subject=Patient/:uid",
+               "params": 
+               {
+                  "url": 
+                  {
+                      "uid": {
+                          "path": "urlParams.uid"
+                      }
+                  }
+                },
+              "headers": {
+                  "Content-Type": "application/fhir+json"
+              }
+          }
+        }]
+    }
+  }
